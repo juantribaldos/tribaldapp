@@ -9,6 +9,9 @@
     "node": "12.16.x",
     "npm": "6.14.x"
   },
+  "devDependencies": {
+     "sqlite3": "^4.1.1"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",

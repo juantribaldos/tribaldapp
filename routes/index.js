@@ -4,7 +4,7 @@ var traer = require("../models/index");
 
 
 var creden = traer.uno;
-
+var stor = traer.dos;
 console.log("DB_name: " +  "   " + creden );
 
 var url = creden.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
@@ -15,18 +15,20 @@ var protocol 	= (url[1]||null);
 var dialect 	= (url[1]||null);
 var port 		= (url[5]||null);
 var host	 	= (url[4]||null);
-//var storage		= process.env.DATABASE_STORAGE;		
+
+//var storage		= "sqlite://:@:/";		
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express',
-						basedat: DB_name,
-						usuario: user,
+  res.render('index', { title: 		'Express',
+						basedat: 	DB_name,
+						usuario: 	user,
 						pwd:		pwd,
 						protocolo:	protocol,
 						dialecto:	dialect,
 						puerto:		port,
-						host:		host });
+						host:		host,
+						storage:	stor   });
 });
 
 
