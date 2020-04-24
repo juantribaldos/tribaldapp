@@ -26,8 +26,7 @@ router.get('/', function(req, res, next) {
 						protocolo:	protocol,
 						dialecto:	dialect,
 						puerto:		port,
-						host:		host,
-						storage:	storage });
+						host:		host });
 });
 
 
