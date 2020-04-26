@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
 	var creden 	="sqlite://:@:/";
 	var storage	= "quiz.sqlite";	
 }								
-module.exports = { uno: creden, dos: storage|| "" }; 
+
 var url = creden.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 //var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 var DB_name 	= (url[6]||null);
@@ -35,14 +35,25 @@ var sequelize = new Sequelize( DB_name, user, pwd,
 		host:		host,
 		storage:	storage,		// solo SQLite (.env)
 		omitNull:	true	 });	//solo Postgres				
+// Importar la definicion de la tabla Prenda en prenda.js
+var prenda_path = path.join(__dirname, 'prenda');
+var Prenda = sequelize.import(prenda_path);
 
-	//var sequelize = new Sequelize(null, null, null,
-		//{dialect: "sqlite", storage: "quiz.sqlite"});
+exports.Prenda = Prenda; // ex
+console.log("Tabla:  " + Prenda.tableName + "    " + process.env.DATABASE_URL + '   ' + Sequelize.DB_name );
 
-
-	// Importar la definicion de la tabla Quiz en quiz.js
-
-
-
-
-
+module.exports = { uno: creden, dos: storage|| "" }; 
+	//sequelize.sync() crea e inicializa tablas de preguntas en DB
+  sequelize.sync().then( function() {
+		// success(..) ejecuta el manejador una vez creada la tabla
+    Prenda.count().then(function (count){  //success : forma antigua
+      if(count === 0){	// la tabla se inicializa solo si esta vacia
+	    Prenda.create({ codigo: 'a1b2c3d4e5',
+						lugar:'file:///home/jcar/Im%C3%A1genes/Screenshot%20-%20241119%20-%2003:12:14.png',
+						vistos: 0 });
+	    Prenda.create({ codigo: 'b1c2d3e4f5',
+						lugar: 'file:///home/jcar/Im%C3%A1genes/acueducto.jpeg',
+						vistos: 0 })
+		.then( function(){ console.log( 'Base de datos inicializada' ); });
+						 };   });  });
+	 console.log( "cuenta count:  "  + Prenda.count );

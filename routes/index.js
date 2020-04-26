@@ -2,10 +2,9 @@ var express = require('express');
 var router = express.Router();
 var traer = require("../models/index");
 
-
 var creden = traer.uno;
 var stor = traer.dos;
-console.log("DB_name: " +  "   " + creden );
+//console.log("DB_name: " +  "   " + creden );
 
 var url = creden.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 var DB_name 	= (url[6]||null);
