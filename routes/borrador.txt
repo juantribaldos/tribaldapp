@@ -1,0 +1,19 @@
+<!--	
+	<table>
+	<% var i; for(i=0; i< prendas.length; i++){%>
+<tr><td><a href="prendas/<%=prendas[i].id %>"><%=prendas[i].lugar %></a></td><tr>
+	<%} %>
+	</table>  -->
+	
+	
+	<p>Prenda Uno	:	<%=prendas[1].id %></p>
+
+
+<p>BaseDatos	:	 	<%=basedat%></p> 
+	<p>usuario		:	 	<%=usuario%></p> 
+	<p>contraseña	:	 	<%=pwd%></p>
+	<p>dialect		:	 	<%=dialecto%></p> 
+	<p>puerto		:	 	<%=puerto%></p> 
+	<p>host			:	 	<%=host%></p> 
+	<p>storage		:	 	<%=storage%></p> 
+	

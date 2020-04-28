@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var traer = require("../models/index");
+var models = require("../models/index.js");
+//var traer = require('../models/index');
 
-var creden = traer.uno;
-var stor = traer.dos;
-//console.log("DB_name: " +  "   " + creden );
+var creden = models.uno;							//antes rojo
+var stor = models.dos;							//antes rojo
+//var Prenda = models.Prenda;							//antes rojo
+console.log("Storage: " +  "   " + stor );
 
 var url = creden.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 var DB_name 	= (url[6]||null);
@@ -19,16 +21,23 @@ var host	 	= (url[4]||null);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 		'Express',
-						basedat: 	DB_name,
-						usuario: 	user,
-						pwd:		pwd,
-						protocolo:	protocol,
-						dialecto:	dialect,
-						puerto:		port,
-						host:		host,
-						storage:	stor   });
-});
+  res.render('index', { title: 		'Express'
+						   
+						});	});
 
+router.get('/prendas', function(req, res) { 
+		models.Prenda.findByPk(2).then(function(prenda){
+		res.render('layout', { prenda: prenda.lugar
+							
+							, basedat: 	DB_name,
+								usuario: 	user,
+								pwd:		pwd,
+								protocolo:	protocol,
+								dialecto:	dialect,
+								puerto:		port,
+								host:		host,
+								storage:	stor			
+								})
+						;})	});
 
 module.exports = router;

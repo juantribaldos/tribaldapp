@@ -5,11 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
-
+var models = require("./models/index.js");
 var routes = require('./routes');
 var user   = require('./routes/user');
 var path   = require('path');
-var db     = require('./models/index');
+//var db     = require('./models/index');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 

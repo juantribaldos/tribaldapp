@@ -78,4 +78,5 @@ module.exports = function(sequelize, DataTypes) {
 // });
 // 
 // Quiz.path = sequelize.import(quiz_path);
-// module.exports.Quiz = Quiz;
+//module.exports.Prenda = Prenda;
+

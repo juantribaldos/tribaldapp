@@ -1,12 +1,12 @@
 
 var path = require('path');
 var express = require("express");
-//if (!global.hasOwnProperty('db')) {
-//  
+//if (!global.hasOwnProperty('db'))
 		// Postgres Database_URL = postgres://user:passwd@host:port/database
 		// SQLite   DATABASE_URL = sqlite://:@:/
 // Cargar Modelo ORM
 var Sequelize = require('sequelize');			
+
 		
 if (process.env.NODE_ENV === 'production') {
   // Your dev-only logic goes here
@@ -36,13 +36,35 @@ var sequelize = new Sequelize( DB_name, user, pwd,
 		storage:	storage,		// solo SQLite (.env)
 		omitNull:	true	 });	//solo Postgres				
 // Importar la definicion de la tabla Prenda en prenda.js
-var prenda_path = path.join(__dirname, 'prenda');
-var Prenda = sequelize.import(prenda_path);
+//var prenda_path = path.join(__dirname, 'prenda');
+//var Prenda = sequelize.import(prenda_path);
 
-exports.Prenda = Prenda; // ex
-console.log("Tabla:  " + Prenda.tableName + "    " + process.env.DATABASE_URL + '   ' + Sequelize.DB_name );
+var Prenda = sequelize.define("Prenda",{
+	//id:{
+	//	primaryKey:true,
+	//	type:Sequelize.INTEGER
+	//	},
+	lugar:{
+		type:Sequelize.STRING,
+		validate:{ notEmpty: {msg:"-> Falta DireccionURL"}}
+	},
+	vistos:{
+		type:Sequelize.INTEGER,
+		validate:{ notEmpty: {msg:"-> Falta Vistos"}}
+	},
+	codigo:{
+		type:Sequelize.STRING,
+		validate:{ notEmpty: {msg:"-> Falta Vistos"}}
+	},
+},{
+	tableName:"prendas"
+}); 
 
-module.exports = { uno: creden, dos: storage|| "" }; 
+//exports.Quiz = Quiz;
+//exports.Prenda = Prenda; // ex
+		console.log("Tabla:  " + Prenda.tableName + "    " + process.env.DATABASE_URL + '   ' + Sequelize.DB_name );
+
+
 	//sequelize.sync() crea e inicializa tablas de preguntas en DB
   sequelize.sync().then( function() {
 		// success(..) ejecuta el manejador una vez creada la tabla
@@ -54,6 +76,13 @@ module.exports = { uno: creden, dos: storage|| "" };
 	    Prenda.create({ codigo: 'b1c2d3e4f5',
 						lugar: 'file:///home/jcar/Im%C3%A1genes/acueducto.jpeg',
 						vistos: 0 })
-		.then( function(){ console.log( 'Base de datos inicializada' ); });
-						 };   });  });
-	 console.log( "cuenta count:  "  + Prenda.count );
+		.then( function(){ console.log( 'Base de datos inicializada num  ' ); });
+						 }else{ console.log( 'Base de datos num de reg:  ' +  count);						 
+					};   });  });
+	 
+	  
+ 
+module.exports = { uno: creden, dos: storage|| "" }; 	//antes rojo 
+//EXPORTANDO EL MODELO DE LA TABLA ARTICULO
+module.exports.Prenda = Prenda; 										//antes negro		
+module.exports.sequelize = sequelize;									//antes negro

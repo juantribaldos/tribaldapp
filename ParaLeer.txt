@@ -9,6 +9,11 @@ git log --oneline
 
 
 
+En sequelize han quitado  findById  por findByPk
+ 
+
+
+
 st/tribaldapp/$ heroku pg:credentials:url DATABASE
 st/tribaldapp/$ heroku addons
 st/tribaldapp/$ heroku config
