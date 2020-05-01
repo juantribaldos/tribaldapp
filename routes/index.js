@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 		'Express' });	});
 
 router.get('/prenda_uno', function(req, res) { 
-		models.Prenda.findByPk(4).then(function(prenda){
+		models.Prenda.findByPk(1).then(function(prenda){
 		res.render('layout', { prenda: prenda.lugar,										
 			basedat: 	DB_name, usuario: 	user, pwd: pwd,
 			protocolo:	protocol, dialecto:	dialect, puerto: port,

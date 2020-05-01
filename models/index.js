@@ -33,7 +33,7 @@ var sequelize = new Sequelize( DB_name, user, pwd,
 		port:		port,
 		host:		host,
 		storage:	storage,		// solo SQLite (.env)
-		omitNull:	true, define:{timestamps:false, freezeTableName:true}});	//solo Postgres				
+		omitNull:	true	});	//solo Postgres				
 //try {
 //  sequelize.authenticate();
 //  console.log('Connection has been established successfully.');
