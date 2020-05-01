@@ -34,12 +34,12 @@ var sequelize = new Sequelize( DB_name, user, pwd,
 		host:		host,
 		storage:	storage,		// solo SQLite (.env)
 		omitNull:	true, define:{timestamps:false, freezeTableName:true}});	//solo Postgres				
-try {
-  sequelize.authenticate();
-  console.log('Connection has been established successfully.');
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-}
+//try {
+//  sequelize.authenticate();
+//  console.log('Connection has been established successfully.');
+//} catch (error) {
+//  console.error('Unable to connect to the database:', error);
+//}
 
 // Importar la definicion de la tabla Prenda en prenda.js
 //var prenda_path = path.join(__dirname, 'prenda');
