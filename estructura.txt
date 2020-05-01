@@ -1,0 +1,28 @@
+
+
+tablas
+
+	prenda			codigo, lugar,  vistos, precio
+	
+	conjunto		codigo, lugar, grupo_prendas, talla
+	
+	proveedor		nif, nombre, enlace_pers, tfno, movil, email, cod_prenda_trabajo
+	
+	cliente			nif, nombre, tfno, movil, email, facebook
+	
+	factura			nif(cliente), importe, codigo, pend_o_no, fecha
+	
+	albaran			nif(proveedor), codigo, importe, pend_o_no, fecha
+	
+	trabajo			codigo(trab), descripcion,  materiales, tiempo_manobra, proveedor(de trabaj)
+	
+	
+	
+	un conjunto tiene varias prendas
+	una prenda sirve para varios conjuntos
+	una prenda es elegida por varios clientes
+	un cliente elige varias prendas
+	un albaran corresponde a un proveedor
+	una factura corresponde a un cliente
+	un cliente tiene varias facturas
+	un proveedor tiene varios albaranes

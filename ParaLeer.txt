@@ -1,7 +1,7 @@
 ***********************************
 
 git add .
-git commit -m “DATABASE_URL”
+git commit -m “creo una tabla prenda”
 git push heroku master
 
 git log --oneline

@@ -6,7 +6,6 @@ var express = require("express");
 		// SQLite   DATABASE_URL = sqlite://:@:/
 // Cargar Modelo ORM
 var Sequelize = require('sequelize');			
-
 		
 if (process.env.NODE_ENV === 'production') {
   // Your dev-only logic goes here
@@ -34,11 +33,18 @@ var sequelize = new Sequelize( DB_name, user, pwd,
 		port:		port,
 		host:		host,
 		storage:	storage,		// solo SQLite (.env)
-		omitNull:	true	 });	//solo Postgres				
+		omitNull:	true, define:{timestamps:false, freezeTableName:true}});	//solo Postgres				
+try {
+  sequelize.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
+
 // Importar la definicion de la tabla Prenda en prenda.js
 //var prenda_path = path.join(__dirname, 'prenda');
 //var Prenda = sequelize.import(prenda_path);
-
+//exports.Prenda = Prenda;
 var Prenda = sequelize.define("Prenda",{
 	//id:{
 	//	primaryKey:true,
@@ -60,29 +66,26 @@ var Prenda = sequelize.define("Prenda",{
 	tableName:"prendas"
 }); 
 
-//exports.Quiz = Quiz;
-//exports.Prenda = Prenda; // ex
-		console.log("Tabla:  " + Prenda.tableName + "    " + process.env.DATABASE_URL + '   ' + Sequelize.DB_name );
-
+	console.log("Tabla:  " + Prenda.tableName + "    " + process.env.DATABASE_URL + '   ' + Sequelize.DB_name );
 
 	//sequelize.sync() crea e inicializa tablas de preguntas en DB
   sequelize.sync().then( function() {
 		// success(..) ejecuta el manejador una vez creada la tabla
     Prenda.count().then(function (count){  //success : forma antigua
       if(count === 0){	// la tabla se inicializa solo si esta vacia
-	    Prenda.create({ codigo: 'a1b2c3d4e5',
+	    Prenda.create({ codigo: 'pant0niño0vaqu0lllm0',
 						lugar:'file:///home/jcar/Im%C3%A1genes/Screenshot%20-%20241119%20-%2003:12:14.png',
 						vistos: 0 });
-	    Prenda.create({ codigo: 'b1c2d3e4f5',
+	    Prenda.create({ codigo: 'chaq0muje0vaqu0lla20',
 						lugar: 'file:///home/jcar/Im%C3%A1genes/acueducto.jpeg',
 						vistos: 0 })
 		.then( function(){ console.log( 'Base de datos inicializada num  ' ); });
 						 }else{ console.log( 'Base de datos num de reg:  ' +  count);						 
 					};   });  });
-	 
-	  
- 
-module.exports = { uno: creden, dos: storage|| "" }; 	//antes rojo 
-//EXPORTANDO EL MODELO DE LA TABLA ARTICULO
-module.exports.Prenda = Prenda; 										//antes negro		
+//EXPORTANDO EL MODELO DE LA TABLA ARTICULO		//exports.Quiz = Quiz;
+
+module.exports = { uno: creden, dos: storage|| "" }; 	//antes rojo 										
+module.exports.Prenda = Prenda; 
+console.log("type of Prenda:   " + "    " + typeof Prenda);// => funcion  class extends Model {}
+
 module.exports.sequelize = sequelize;									//antes negro
