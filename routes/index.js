@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var models = require("../models/index.js");
-
 var prendaControl = require('../controles/prenda_controles');
-
 
 
 //var traer = require('../models/index');
@@ -24,6 +22,9 @@ var host	 	= (url[4]||null);
 router.get('/', function(req, res, next) {
   res.render('index', { title: 		'Express' });	});
 
+// Autoload de comandos con :quizId
+router.param('prendaId', prendaControl.load); 		// autoload :prendaId
+
 router.get('/prenda_uno', function(req, res) { 
 		models.Prenda.findByPk(1).then(function(prenda){
 		res.render('layout', { prenda: prenda.lugar,										
@@ -32,9 +33,8 @@ router.get('/prenda_uno', function(req, res) {
 			host:		host, storage:	stor	});})	});
 
 
-router.get('/prendas',         	prendaControl.index );
-
-
+router.get('/prendas',         					prendaControl.index );
+router.get('/l_prendas/:prendaId(\\d+)',        prendaControl.show	);
 
 
 

@@ -1,17 +1,16 @@
 var models = require("../models/index.js");		// Autoload - factoriza el código si la ruta incluye :quizId
 
 
-// Autoload - factoriza el código si la ruta incluye :quizId
-//exports.load = function(req, res, next, prendaId) {
-//	models.Prenda.find(prendaId).then(
-//		function(prenda){
-//			if (prenda) {
-//				req.prenda = prenda;
-//				next();
-//			}else {	next(new Error('No existe prendaId=' + prendaId));
-//			}}	).catch(function(error){ next(error);});
-//};
-
+// Autoload - factoriza el código si la ruta incluye :prendaId
+exports.load = function(req, res, next, prendaId) {
+	models.Prenda.findByPk(prendaId).then(
+		function(prenda){
+			if (prenda) {
+				req.prenda = prenda;
+				next();
+			}else {	next(new Error('No existe prendaId=' + prendaId));
+			}}	).catch(function(error){ next(error);});
+};
 // GET /prendas
 exports.index = function(req, res) {
 		models.Prenda.findAll().then(

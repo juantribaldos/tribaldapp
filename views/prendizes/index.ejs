@@ -16,7 +16,7 @@
 	<p>Bienvenido al Café </p><br> 
 <table>
 <% var i; for (i=0; i < prendas.length; i++) { %>		
-   	<p>  <a href="<%= prendas[i].lugar %>" target="_blank">Mirar la imagen</a></p>
+	<a href=<%=prendas[i].lugar %> target="_blank" > <%=prendas[i].lugar %> Mira </a>	
 <% } %>
 		
 </table>
@@ -24,3 +24,6 @@
 </body>
 </html>
 						
+
+ <!--<tr><td><a href="l_prendas/
+ <!--prendas[i].id ">prendas[i].lugar %></a></td></tr>	-->
