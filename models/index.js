@@ -73,12 +73,14 @@ var Prenda = sequelize.define("Prenda",{
 		// success(..) ejecuta el manejador una vez creada la tabla
     Prenda.count().then(function (count){  //success : forma antigua
       if(count === 0){	// la tabla se inicializa solo si esta vacia
-	    Prenda.create({ codigo: 'pant0niño0vaqu0lllm0',
-						lugar:'file:///home/jcar/Im%C3%A1genes/Screenshot%20-%20241119%20-%2003:12:14.png',
-						vistos: 0 });
-	    Prenda.create({ codigo: 'chaq0muje0vaqu0lla20',
-						lugar: 'file:///home/jcar/Im%C3%A1genes/acueducto.jpeg',
-						vistos: 0 })
+	    Prenda.create({ id: 1,
+						lugar:'https://drive.google.com/open?id=0B1oK-10muE7xNDgxUFFvNjV4TWs',
+						vistos: 0,
+						codigo: 'pant0niño0vaqu0lllm0' });
+	    Prenda.create({ id: 2,
+						lugar: 'https://drive.google.com/open?id=1wp_ua-Ss8vMg447ez4RDPOj1BIpSBZMO',
+						vistos: 0,
+						codigo: 'chaq0muje0vaqu0lla20' })
 		.then( function(){ console.log( 'Base de datos inicializada num  ' ); });
 						 }else{ console.log( 'Base de datos num de reg:  ' +  count);						 
 					};   });  });
