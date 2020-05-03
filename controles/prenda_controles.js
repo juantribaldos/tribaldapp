@@ -34,7 +34,14 @@ exports.codigo = function(req, res) {
 	res.render('prendizes/codigo', { prenda: req.prenda, codigo: cod_prenda, errors: []});
 };
 
+// GET /quizes/new
+exports.new = function(req, res) {
+  var prenda = models.Prenda.build( // crea objeto quiz 
+    {lugar: "Lugar", vistos: "Vistos", codigo: "Codigo"}
+  );
 
+  res.render('prendizes/new', {prenda: prenda, errors: []});
+};
 
 
 

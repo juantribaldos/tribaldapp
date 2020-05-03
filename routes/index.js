@@ -19,23 +19,25 @@ var host	 	= (url[4]||null);
 
 //var storage		= "sqlite://:@:/";		
 /* GET home page. ByPk*/
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 		'Express' });	});
+
+//router.get('/', function(req, res, next) {
+//  res.render('index', { title: 		'Express' });	});
 
 // Autoload de comandos con :quizId
 router.param('prendaId', prendaControl.load); 		// autoload :prendaId
 
-router.get('/prenda_uno', function(req, res) { 
-		models.Prenda.findByPk(1).then(function(prenda){
-		res.render('layout', { prenda: prenda.lugar,										
-			basedat: 	DB_name, usuario: 	user, pwd: pwd,
-			protocolo:	protocol, dialecto:	dialect, puerto: port,
-			host:		host, storage:	stor	});})	});
+ router.get('/', function(req, res) { 
+ 		models.Prenda.findByPk(1).then(function(prenda){
+ 		res.render('index', { prenda: prenda.lugar,										
+ 			basedat: 	DB_name, usuario: 	user, pwd: pwd,
+ 			protocolo:	protocol, dialecto:	dialect, puerto: port,
+ 			host:		host, storage:	stor,	
+ 			title: 		'Express'});})	});
 
 
 router.get('/prendas',         					prendaControl.index );
 router.get('/l_prendas/:prendaId(\\d+)',        prendaControl.show	);
-
+router.get('/prendas/new',         				prendaControl.new );
 
 
 

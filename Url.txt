@@ -7,3 +7,12 @@ https://concurso-b93c0.web.app/
 https://desegundo02.web.app/
 https://quiz-proy.herokuapp.com/
 https://tribaldapp.herokuapp.com/
+
+
+
+
+
+consulta:
+
+https://medium.com/@jenniferolibie/how-to-link-heroku-postgresql-to-your-nodejs-app-c5df65cf6675
+https://stackabuse.com/adding-a-postgresql-database-to-a-node-js-app-on-heroku/
