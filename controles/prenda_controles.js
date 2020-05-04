@@ -36,12 +36,14 @@ exports.codigo = function(req, res) {
 
 // GET /quizes/new
 exports.new = function(req, res) {
-  var prenda = models.Prenda.build( // crea objeto quiz 
-    {lugar: "Lugar", vistos: "Vistos", codigo: "Codigo"}
-  );
-
-  res.render('prendizes/new', {prenda: prenda, errors: []});
+	var prenda = models.Prenda.build( 
+	    { lugar: "Lugar", vistos: "Vistos", codigo: "Codigo" });
+  res.render('prendizes/new', { prenda: prenda });
 };
 
-
+exports.create = function(req, res) {
+  var prenda = models.Prenda.build( req.body.prenda );
+      prenda.save({fields: [ "lugar", "codigo", "vistos"]})
+        .then( function(){ res.redirect('/prendas')}) 
+      };      
 

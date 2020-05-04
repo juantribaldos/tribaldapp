@@ -33,7 +33,11 @@ var sequelize = new Sequelize( DB_name, user, pwd,
 		port:		port,
 		host:		host,
 		storage:	storage,		// solo SQLite (.env)
-		omitNull:	true	});	//solo Postgres				
+		omitNull:	true,			//solo Postgres
+		define:{
+		timestamps:false, //columnas que dicen cuando se creó la tabla
+		freezeTableName:true //Se quita la convección sobre el nombre	
+		}});									
 //try {
 //  sequelize.authenticate();
 //  console.log('Connection has been established successfully.');
@@ -46,10 +50,10 @@ var sequelize = new Sequelize( DB_name, user, pwd,
 //var Prenda = sequelize.import(prenda_path);
 //exports.Prenda = Prenda;
 var Prenda = sequelize.define("Prenda",{
-	id:{
-		primaryKey:true,
-		type:Sequelize.INTEGER
-	},
+// 	id:{
+// 		primaryKey:true,
+// 		type:Sequelize.INTEGER
+// 	},
 	lugar:{
 		type:Sequelize.STRING,
 		validate:{ notEmpty: {msg:"-> Falta DireccionURL"}}
@@ -73,11 +77,11 @@ var Prenda = sequelize.define("Prenda",{
 		// success(..) ejecuta el manejador una vez creada la tabla
     Prenda.count().then(function (count){  //success : forma antigua
       if(count === 0){	// la tabla se inicializa solo si esta vacia
-	    Prenda.create({ id: 1,
+	    Prenda.create({ //id: 1,
 						lugar:'https://drive.google.com/open?id=0B1oK-10muE7xNDgxUFFvNjV4TWs',
 						vistos: 0,
 						codigo: 'pant0niño0vaqu0lllm0' });
-	    Prenda.create({ id: 2,
+	    Prenda.create({ //id: 2,
 						lugar: 'https://drive.google.com/open?id=1wp_ua-Ss8vMg447ez4RDPOj1BIpSBZMO',
 						vistos: 0,
 						codigo: 'chaq0muje0vaqu0lla20' })

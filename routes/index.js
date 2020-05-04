@@ -35,9 +35,10 @@ router.param('prendaId', prendaControl.load); 		// autoload :prendaId
  			title: 		'Express'});})	});
 
 
-router.get('/prendas',         					prendaControl.index );
-router.get('/l_prendas/:prendaId(\\d+)',        prendaControl.show	);
-router.get('/prendas/new',         				prendaControl.new );
+router.get	('/prendas',         				prendaControl.index 	);
+router.get	('/l_prendas/:prendaId(\\d+)',      prendaControl.show		);
+router.get	('/prendizes/new',       			prendaControl.new 		);
+router.post	('/prendizes/create',				prendaControl.create 	);
 
 
 

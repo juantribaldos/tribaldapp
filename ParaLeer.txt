@@ -10,7 +10,9 @@ git log --oneline
 
 
 En sequelize han quitado  findById  por findByPk
- 
+
+heroku pg:reset DATABASE   se borra toda la BD
+
 
 
 
