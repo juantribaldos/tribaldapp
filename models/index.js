@@ -50,10 +50,11 @@ var sequelize = new Sequelize( DB_name, user, pwd,
 //var Prenda = sequelize.import(prenda_path);
 //exports.Prenda = Prenda;
 var Prenda = sequelize.define("Prenda",{
-// 	id:{
-// 		primaryKey:true,
-// 		type:Sequelize.INTEGER
-// 	},
+ 	id:{
+ 		primaryKey: true,
+		autoIncrement: true, 
+ 		type:Sequelize.INTEGER
+ 	},
 	lugar:{
 		type:Sequelize.STRING,
 		validate:{ notEmpty: {msg:"-> Falta DireccionURL"}}
