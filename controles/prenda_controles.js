@@ -38,12 +38,31 @@ exports.codigo = function(req, res) {
 exports.new = function(req, res) {
 	var prenda = models.Prenda.build( 
 	    { lugar: "Lugar", vistos: "Vistos", codigo: "Codigo" });
-  res.render('prendizes/new', { prenda: prenda });
+  res.render('prendizes/new', { prenda: prenda, errors: [] });		};
+
+exports.create = function(req, res){
+  var prenda = models.Prenda.build( req.body.prenda );  		
+	prenda.save({ fields: [ "lugar", "codigo", "vistos" ]})
+	.then( function(){ res.redirect('/prendas')});	};
+
+exports.edit = function(req, res) {			//console.log("Estoy en EDIT");
+    var prenda = req.prenda;  // req.quiz: autoload de instancia de quiz
+	res.render('prendizes/edit', { prenda: prenda, errors: []});
 };
-
-exports.create = function(req, res) {
-  var prenda = models.Prenda.build( req.body.prenda );
-      prenda.save({fields: [ "lugar", "codigo", "vistos"]})
-        .then( function(){ res.redirect('/prendas')}) 
-      };      
-
+ // PUT /prendizes/:id
+exports.update = function(req, res) {			//console.log("Estoy en UPDATE");
+    req.prenda.lugar   = req.body.prenda.lugar;
+	req.prenda.vistos  = req.body.prenda.vistos;
+	req.prenda.codigo  = req.body.prenda.codigo;
+    // req.prenda 
+	var errors = req.prenda.validate();	//ya que el objeto errors no tiene then(
+	req.prenda 						// save: guarda en DB campos pregunta y respuesta de quiz
+    .save({ fields: ["lugar", "vistos", "codigo"] })
+    .then( function(){ res.redirect('/prendas') })   
+}
+// DELETE /quizes/:id
+exports.destroy = function(req, res) {
+	req.prenda.destroy().then(function() {
+		res.redirect('/prendas');
+	}).catch(function(error) { next(error) });
+};

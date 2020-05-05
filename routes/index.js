@@ -32,15 +32,15 @@ router.param('prendaId', prendaControl.load); 		// autoload :prendaId
  			basedat: 	DB_name, usuario: 	user, pwd: pwd,
  			protocolo:	protocol, dialecto:	dialect, puerto: port,
  			host:		host, storage:	stor,	
- 			title: 		'Express'});})	});
+ 			title: 		'Express', errors: [] });})	});
 
 
-router.get	('/prendas',         				prendaControl.index 	);
-router.get	('/l_prendas/:prendaId(\\d+)',      prendaControl.show		);
-router.get	('/prendizes/new',       			prendaControl.new 		);
-router.post	('/prendizes/create',				prendaControl.create 	);
-
-
-
+router.get		('/prendas',         					prendaControl.index   );
+router.get		('/l_prendas/:prendaId(\\d+)',      	prendaControl.show	  );
+router.get		('/prendizes/new',       				prendaControl.new 	  );
+router.post		('/prendizes/create',					prendaControl.create  );
+router.get		('/prendizes/:prendaId(\\d+)/edit', 	prendaControl.edit	  );
+router.put		('/prendizes/:prendaId(\\d+)', 			prendaControl.update  );
+router.delete	('/prendizes/:prendaId(\\d+)', 			prendaControl.destroy );
 
 module.exports = router;

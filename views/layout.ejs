@@ -5,6 +5,7 @@
 <title>example-app</title>
 <style type="text/css">
 </style>
+<!--<link rel='stylesheet' href='/stylesheets/style.css' /> -->
 </head>
 
 <body>
@@ -17,12 +18,24 @@
     <span><a href="/prendas">Preguntas</a></span>
   </nav>
   <section class="main" id="s1">
+	<% if (errors.length) { %>
+      <span id='ErrorMsgs'>
+        Corregir errores:<br/>
+        <% for (var i in errors) { %>
+           <span> <%= errors[i].message %> </span><br/>
+        <% } %>
+      </span>
+    <% } %> 
+	 
+	  
     <div><%- body %></div>
   </section>
   <footer class="main" id="f1">
 	 
     <!--<a href="http://es.wikipedia.org/wiki/Quiz">
       ¿Que es un Quiz?</a>  -->
+      
+      
   </footer>
    
 </div>

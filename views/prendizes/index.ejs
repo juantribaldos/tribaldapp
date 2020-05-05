@@ -1,9 +1,15 @@
 <table>
 <% var i; for (i=0; i < prendas.length; i++) { %>		
-	<a href=<%=prendas[i].lugar %> target="_blank" > <%=prendas[i].lugar %> Mira</a><br>
+	
+	<tr><td><a href=<%=prendas[i].lugar %> target="_blank" > <%=prendas[i].lugar %> Mira</a>
+			<a href="prendizes/<%= prendas[i].id %>/edit"><button>editar</button></a></td></tr>
+		<td><form method="post" action="/prendizes/<%= prendas[i].id %>?_method=delete">
+				<button type="submit" onClick="return confirm('Borrar: <%= prendas[i].pregunta %>');">
+					Borrar
+				</button>
+			</form></td>				
 <% } %>		
-</table>						
-
-<a href="/prendizes/new"><button>Crear prenda</button></a>
+</table><p>						
+<a href="/prendizes/new"><button type="button">Crear prenda</button></a>
 
  

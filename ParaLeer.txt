@@ -22,11 +22,15 @@ st/tribaldapp/$ heroku config
 
 heroku addons:rename
 heroku help addons:rename
+heroku login
 
 Por ejemplo: si su base de datos se nombra postgresql-loudly-9983y se adjunta a la aplicación bumping-softly-6892, y desea cambiarle el nombre stats-db, su comando sería el siguiente:
 
 heroku addons:rename postgresql-loudly-9983 stats-db -a bumping-softly-6892
+Promesas de JavaScript: introducción
 
+
+https://developers.google.com/web/fundamentals/primers/promises?hl=es
 
 jcar@jcar-VirtualBox:~/mis_proy/node_est/tribaldapp/$ heroku addons:rename postgresql-regular-95043 prendas-db -a tribaldapp
 postgresql-regular-95043 successfully renamed to prendas-db.
