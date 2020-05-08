@@ -1,0 +1,14 @@
+  <form  method="get" action="/prendas/<%= prenda.id %>/codigo">
+  
+    Lugar: <%= prenda.lugar %> <p>
+    <input type="text" name="codigo" value="Codigo"/>
+    <input type="submit" value="Enviar">
+  </form>
+  
+  <p><a href="/prendas/<%= prenda.id %>/notas/new"><button>Nueva nota</button></a></p>
+  
+  <p><strong>Notas:</strong></p>
+	<%for(index in prenda.Notas){ %>
+      <p>- <%=prenda.Notas[index].texto %>		  		
+	<%}%>
+

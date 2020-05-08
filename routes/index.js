@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var models = require("../models/index.js");
 var prendaControl = require('../controles/prenda_controles');
-
+var notaControl   = require('../controles/nota_controles');
 
 //var traer = require('../models/index');
 
@@ -25,6 +25,8 @@ var host	 	= (url[4]||null);
 
 // Autoload de comandos con :quizId
 router.param('prendaId', prendaControl.load); 		// autoload :prendaId
+router.param('notaId', notaControl.load)
+
 
  router.get('/', function(req, res) { 
  		models.Prenda.findByPk(1).then(function(prenda){
@@ -36,11 +38,16 @@ router.param('prendaId', prendaControl.load); 		// autoload :prendaId
 
 
 router.get		('/prendas',         					prendaControl.index   );
-router.get		('/l_prendas/:prendaId(\\d+)',      	prendaControl.show	  );
+//router.get		('/l_prendas/:prendaId(\\d+)',      	prendaControl.show	  );
 router.get		('/prendizes/new',       				prendaControl.new 	  );
 router.post		('/prendizes/create',					prendaControl.create  );
 router.get		('/prendizes/:prendaId(\\d+)/edit', 	prendaControl.edit	  );
 router.put		('/prendizes/:prendaId(\\d+)', 			prendaControl.update  );
 router.delete	('/prendizes/:prendaId(\\d+)', 			prendaControl.destroy );
+router.get		('/prendizes/:prendaId(\\d+)/codigo',	prendaControl.codigo  );
+
+router.get	('/prendizes/:prendaId(\\d+)/notas/n_nota', notaControl.new	  );
+router.post	('/prendizes/:prendaId(\\d+)/notas', 		notaControl.create  );
+
 
 module.exports = router;

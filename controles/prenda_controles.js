@@ -3,14 +3,23 @@ var models = require("../models/index.js");		// Autoload - factoriza el código 
 
 // Autoload - factoriza el código si la ruta incluye :prendaId
 exports.load = function(req, res, next, prendaId) {
-	models.Prenda.findByPk(prendaId).then(
-		function(prenda){
+	models.Prenda.findOne({
+		where: { id: Number(prendaId) },
+		include: [{ model: models.Nota }]
+	}).then( function(prenda) {
 			if (prenda) {
 				req.prenda = prenda;
+				console.log("Autoload prenda: " + prendaId);
 				next();
-			}else {	next(new Error('No existe prendaId=' + prendaId));
-			}}	).catch(function(error){ next(error);});
-};
+			} else {
+				next(new Error('No existe prendaId=' + prendaId));
+				console.log("Autoload ERROR: " + prendaId);
+			}
+		}
+	).catch(function(error) {
+		next(error);
+	});
+}
 // GET /prendas
 exports.index = function(req, res) {
 		models.Prenda.findAll().then(

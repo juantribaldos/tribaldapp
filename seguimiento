@@ -1,0 +1,10 @@
+http://localhost:3000/
+preguntas
+		/views/prendizes/index.ejs
+http://localhost:3000/prendas		listado de prendas    |editar|Nueva nota|
+		Nueva nota =>
+router.get('/prendizes/:prendaId(\\d+)/notas/n_nota', notaControl.new );		
+http://localhost:3000/prendizes/3/notas/n_nota
+
+	res.render('notas/nueva_nota.ejs', { prendaid: req.params.prendaId,
+

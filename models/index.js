@@ -7,13 +7,13 @@ var express = require("express");
 // Cargar Modelo ORM
 var Sequelize = require('sequelize');			
 		
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production'){
   // Your dev-only logic goes here
   //var creden = "postgres://ydzlhmcozpkisi:e7e7ab670dc77aa2e9e277b4cd72460a536fe376ca7d559c28ee845bac0e9576@ec2-54-247-118-139.eu-west-1.compute.amazonaws.com:5432/dd1qae8qjsccgs";
 	var creden = process.env.DATABASE_URL;
 }else{
 	var creden 	="sqlite://:@:/";
-	var storage	= "quiz.sqlite";	
+	var storage	= "prenda.sqlite";	
 }								
 
 var url = creden.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
@@ -46,37 +46,19 @@ var sequelize = new Sequelize( DB_name, user, pwd,
 //}
 
 // Importar la definicion de la tabla Prenda en prenda.js
-//var prenda_path = path.join(__dirname, 'prenda');
-//var Prenda = sequelize.import(prenda_path);
-//exports.Prenda = Prenda;
-var Prenda = sequelize.define("Prenda",{
- 	id:{
- 		primaryKey: true,
-		autoIncrement: true, 
- 		type:Sequelize.INTEGER
- 	},
-	lugar:{
-		type:Sequelize.STRING,
-		validate:{ notEmpty: {msg:"-> Falta DireccionURL"}}
-	},
-	vistos:{
-		type:Sequelize.INTEGER,
-		validate:{ notEmpty: {msg:"-> Falta Vistos"}}
-	},
-	codigo:{
-		type:Sequelize.STRING,
-		validate:{ notEmpty: {msg:"-> Falta Vistos"}}
-	},
-},{
-	tableName:"prendas"
-}); 
+var prenda_path = path.join(__dirname, 'prenda');
+var Prenda = sequelize.import(prenda_path);
+var nota_path = path.join(__dirname, 'nota');
+var Nota = sequelize.import(nota_path);
+Nota.belongsTo(Prenda);  // exportar tabla Nota
+Prenda.hasMany(Nota);
 
-	console.log("Tabla:  " + Prenda.tableName + "    " + process.env.DATABASE_URL + '   ' + Sequelize.DB_name );
+  console.log("Tabla:  " + Prenda.tableName + "    " + process.env.DATABASE_URL + '   ' + Sequelize.DB_name );
 
 	//sequelize.sync() crea e inicializa tablas de preguntas en DB
   sequelize.sync().then( function() {
 		// success(..) ejecuta el manejador una vez creada la tabla
-    Prenda.count().then(function (count){  //success : forma antigua
+  Prenda.count().then(function (count){  //success : forma antigua
       if(count === 0){	// la tabla se inicializa solo si esta vacia
 	    Prenda.create({ //id: 1,
 						lugar:'https://drive.google.com/open?id=0B1oK-10muE7xNDgxUFFvNjV4TWs',
@@ -89,10 +71,14 @@ var Prenda = sequelize.define("Prenda",{
 		.then( function(){ console.log( 'Base de datos inicializada num  ' ); });
 						 }else{ console.log( 'Base de datos num de reg:  ' +  count);						 
 					};   });  });
-//EXPORTANDO EL MODELO DE LA TABLA ARTICULO		//exports.Quiz = Quiz;
 
-module.exports = { uno: creden, dos: storage|| "" }; 	//antes rojo 										
-module.exports.Prenda = Prenda; 
 console.log("type of Prenda:   " + "    " + typeof Prenda);// => funcion  class extends Model {}
 
-module.exports.sequelize = sequelize;									//antes negro
+module.exports = { uno: creden, dos: storage|| "", Prenda: Prenda, 
+					 sequelize: sequelize, Nota: Nota }; 	 										
+
+//Problemas:
+//module.exports.sequelize = sequelize;									
+//module.exports.Prenda = Prenda;
+//exports.Quiz = Quiz;
+//exports.Prenda = Prenda;
