@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var models = require("../models/index.js");
-var prendaControl = require('../controles/prenda_controles');
-var notaControl   = require('../controles/nota_controles');
+var prendaControl =  require('../controles/prenda_controles');
+var notaControl   =  require('../controles/nota_controles');
+var sesionControl =  require('../controles/sesion_controles');
+var usuarioControl = require('../controles/usuario_controles');
 
 //var traer = require('../models/index');
 
@@ -26,7 +28,7 @@ var host	 	= (url[4]||null);
 // Autoload de comandos con :quizId
 router.param('prendaId', prendaControl.load); 		// autoload :prendaId
 router.param('notaId', notaControl.load)
-
+//router.param('userId', usuarioControl.load);  // autoload :userId
 
  router.get('/', function(req, res) { 
  		models.Prenda.findByPk(1).then(function(prenda){
@@ -38,16 +40,25 @@ router.param('notaId', notaControl.load)
 
 
 router.get		('/prendas',         					prendaControl.index   );
-//router.get		('/l_prendas/:prendaId(\\d+)',      	prendaControl.show	  );
-router.get		('/prendizes/new',       				prendaControl.new 	  );
-router.post		('/prendizes/create',					prendaControl.create  );
-router.get		('/prendizes/:prendaId(\\d+)/edit', 	prendaControl.edit	  );
-router.put		('/prendizes/:prendaId(\\d+)', 			prendaControl.update  );
-router.delete	('/prendizes/:prendaId(\\d+)', 			prendaControl.destroy );
+router.get		('/prendizes/:prendaId(\\d+)',      	prendaControl.show	  );
 router.get		('/prendizes/:prendaId(\\d+)/codigo',	prendaControl.codigo  );
+router.get		('/prendizes/new',       				sesionControl.loginRequired, prendaControl.new 	  );
+router.post		('/prendizes/create',					sesionControl.loginRequired, prendaControl.create  );
+router.get		('/prendizes/:prendaId(\\d+)/edit', 	sesionControl.loginRequired, prendaControl.edit	  );
+router.put		('/prendizes/:prendaId(\\d+)', 			sesionControl.loginRequired, prendaControl.update  );
+router.delete	('/prendizes/:prendaId(\\d+)', 			sesionControl.loginRequired, prendaControl.destroy );
+
 
 router.get	('/prendizes/:prendaId(\\d+)/notas/n_nota', notaControl.new	  );
 router.post	('/prendizes/:prendaId(\\d+)/notas', 		notaControl.create  );
+router.get('/prendizes/:prendaId(\\d+)/notas/:notaId(\\d+)/publish', 
+	                                    sesionControl.loginRequired, notaControl.publish);
 
+module.exports = router;
+
+// Definición de rutas de sesion
+router.get	('/login',  sesionControl.new);     // formulario login
+router.post	('/login', sesionControl.create);  // crear sesión
+router.get	('/logout', sesionControl.destroy); // destruir sesión
 
 module.exports = router;

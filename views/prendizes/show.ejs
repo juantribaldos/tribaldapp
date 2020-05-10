@@ -1,5 +1,4 @@
-  <form  method="get" action="/prendas/<%= prenda.id %>/codigo">
-  
+  <form  method="get" action="/prendas/<%= prenda.id %>/codigo"> 
     Lugar: <%= prenda.lugar %> <p>
     <input type="text" name="codigo" value="Codigo"/>
     <input type="submit" value="Enviar">
@@ -9,6 +8,12 @@
   
   <p><strong>Notas:</strong></p>
 	<%for(index in prenda.Notas){ %>
-      <p>- <%=prenda.Notas[index].texto %>		  		
+		<%if( prenda.Notas[index].publicado || session.user){%>
+			<p>- <%=prenda.Notas[index].informe%></p>
+		<%if(session.user && !prenda.Notas[index].publicado) {%>
+	<a href="/prendizes/<%= prenda.id %>/notas/<%=prenda.Notas[index].id%>/publish"><button>Publicar</button></a></p>
 	<%}%>
-
+<%}%>
+		
+      <p>- <%=prenda.Notas[index].informe %></p>		  		
+	<%}%>

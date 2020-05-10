@@ -1,6 +1,7 @@
 var models = require("../models/index.js");		// Autoload - factoriza el código si la ruta incluye :quizId
 var sequelize = models.sequelize;	
 
+
 // Autoload :id de comentarios
 exports.load = function(req, res, next, notaId) {
   models.Nota.findOne({
@@ -31,4 +32,11 @@ console.log('Nota ' + nota.informe + ' creado con éxito.');
 }) };
 
 //.finally(() => { sequelize.close(); });
+				// GET /quizes/:quizId/comments/:commentId/publish
+exports.publish = function( req, res ){                                                    // GET /quizes/:quizId/comments/:commentId/publish
+     req.nota.publicado = true;         
+     req.nota.save({ fields: ["publicado"] })
+     .then( function() { res.redirect('/prendizes/' + req.params.prendaId ); })
+     .catch( function( error ){ next( error ); });
+};
 

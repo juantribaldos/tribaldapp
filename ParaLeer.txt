@@ -26,8 +26,11 @@ heroku addons:rename postgresql-loudly-9983 stats-db -a bumping-softly-6892
 Promesas de JavaScript: introducción
 https://developers.google.com/web/fundamentals/primers/promises?hl=es
 
-heroku logs --tail
+heroku logs --tail  con este comando buscamos el error:
 
 Primer error corregido creando la tabla con primary key autoincrement
 "2020-05-05T20:49:29.982152+00:00 app[web.1]: Unhandled rejection SequelizeDatabaseError: null value in column "id" violates not-null constraint
 2020-05-05T20:49:29.982153+00:00 app[web.1]: at Query.formatError (/app/node_modules/sequelize/lib/dialects/postgres/query.js:366:16 "
+
+La aplicación no nos funciona si a session lo llamamos sesion y a user usuario
+La variable en layout:  sesion.usuario( sesion no lo reconoce ) ha siso un obstaculo hasta que lo cambiamos a session y user en toda la aplicacion.

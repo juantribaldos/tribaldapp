@@ -7,7 +7,11 @@ module.exports = function(sequelize, DataTypes) {
 	informe: {
         type: DataTypes.STRING,
         validate: { notEmpty: { msg: "-> Falta texto" }}
-			}      
+			},
+      publicado: {
+      	type: DataTypes.BOOLEAN,
+      	defaultValue: false
+      }      
     }
 )};
 
